@@ -1,0 +1,1207 @@
+{
+  "machine": {
+    "blank": " ",
+    "start state": "start",
+    "final states": [
+      "done"
+    ],
+    "table": {
+      "start": {
+        "0": {
+          "L": "init"
+        },
+        "1": {
+          "L": "init"
+        }
+      },
+      "init": {
+        " ": {
+          "write": "+",
+          "R": "right"
+        }
+      },
+      "right": {
+        "0": "R",
+        "1": "R",
+        "*": "R",
+        " ": {
+          "L": "readB"
+        }
+      },
+      "readB": {
+        "0": {
+          "write": " ",
+          "L": "doubleL"
+        },
+        "1": {
+          "write": " ",
+          "L": "addA"
+        }
+      },
+      "addA": {
+        "0": "L",
+        "1": "L",
+        "*": {
+          "L": "read"
+        }
+      },
+      "doubleL": {
+        "0": "L",
+        "1": "L",
+        "*": {
+          "write": "0",
+          "R": "shift"
+        }
+      },
+      "double": {
+        "0": "R",
+        "1": "R",
+        "+": "R",
+        "*": {
+          "write": "0",
+          "R": "shift"
+        }
+      },
+      "shift": {
+        "0": {
+          "write": "*",
+          "R": "shift0"
+        },
+        "1": {
+          "write": "*",
+          "R": "shift1"
+        },
+        " ": {
+          "L": "tidy"
+        }
+      },
+      "shift0": {
+        "0": {
+          "R": "shift0"
+        },
+        "1": {
+          "write": "0",
+          "R": "shift1"
+        },
+        " ": {
+          "write": "0",
+          "R": "right"
+        }
+      },
+      "shift1": {
+        "0": {
+          "write": "1",
+          "R": "shift0"
+        },
+        "1": {
+          "R": "shift1"
+        },
+        " ": {
+          "write": "1",
+          "R": "right"
+        }
+      },
+      "tidy": {
+        "0": {
+          "write": " ",
+          "L": "tidy"
+        },
+        "1": {
+          "write": " ",
+          "L": "tidy"
+        },
+        "+": {
+          "write": " ",
+          "L": "done"
+        }
+      },
+      "done": {},
+      "read": {
+        "0": {
+          "write": "c",
+          "L": "have0"
+        },
+        "1": {
+          "write": "c",
+          "L": "have1"
+        },
+        "+": {
+          "L": "rewrite"
+        }
+      },
+      "have0": {
+        "0": "L",
+        "1": "L",
+        "+": {
+          "L": "add0"
+        }
+      },
+      "have1": {
+        "0": "L",
+        "1": "L",
+        "+": {
+          "L": "add1"
+        }
+      },
+      "add0": {
+        "0": {
+          "write": "O",
+          "R": "back0"
+        },
+        " ": {
+          "write": "O",
+          "R": "back0"
+        },
+        "1": {
+          "write": "I",
+          "R": "back0"
+        },
+        "O": "L",
+        "I": "L"
+      },
+      "add1": {
+        "0": {
+          "write": "I",
+          "R": "back1"
+        },
+        " ": {
+          "write": "I",
+          "R": "back1"
+        },
+        "1": {
+          "write": "O",
+          "L": "carry"
+        },
+        "O": "L",
+        "I": "L"
+      },
+      "carry": {
+        "0": {
+          "write": "1",
+          "R": "back1"
+        },
+        " ": {
+          "write": "1",
+          "R": "back1"
+        },
+        "1": {
+          "write": "0",
+          "L": "carry"
+        }
+      },
+      "back0": {
+        "0": "R",
+        "1": "R",
+        "O": "R",
+        "I": "R",
+        "+": "R",
+        "c": {
+          "write": "0",
+          "L": "read"
+        }
+      },
+      "back1": {
+        "0": "R",
+        "1": "R",
+        "O": "R",
+        "I": "R",
+        "+": "R",
+        "c": {
+          "write": "1",
+          "L": "read"
+        }
+      },
+      "rewrite": {
+        "O": {
+          "write": "0",
+          "L": "rewrite"
+        },
+        "I": {
+          "write": "1",
+          "L": "rewrite"
+        },
+        "0": "L",
+        "1": "L",
+        " ": {
+          "R": "double"
+        }
+      }
+    }
+  },
+  "input": "11*101",
+  "output": "1111",
+  "execution_history": [
+    {
+      "state": "start",
+      "symbole": "1",
+      "mem": "11*101",
+      "tr": {
+        "L": "init"
+      },
+      "pos": 0
+    },
+    {
+      "state": "init",
+      "symbole": " ",
+      "mem": " 11*101",
+      "tr": {
+        "write": "+",
+        "R": "right"
+      },
+      "pos": 0
+    },
+    {
+      "state": "right",
+      "symbole": "1",
+      "mem": "+11*101",
+      "tr": "R",
+      "pos": 1
+    },
+    {
+      "state": "right",
+      "symbole": "1",
+      "mem": "+11*101",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "right",
+      "symbole": "*",
+      "mem": "+11*101",
+      "tr": "R",
+      "pos": 3
+    },
+    {
+      "state": "right",
+      "symbole": "1",
+      "mem": "+11*101",
+      "tr": "R",
+      "pos": 4
+    },
+    {
+      "state": "right",
+      "symbole": "0",
+      "mem": "+11*101",
+      "tr": "R",
+      "pos": 5
+    },
+    {
+      "state": "right",
+      "symbole": "1",
+      "mem": "+11*101",
+      "tr": "R",
+      "pos": 6
+    },
+    {
+      "state": "right",
+      "symbole": " ",
+      "mem": "+11*101 ",
+      "tr": {
+        "L": "readB"
+      },
+      "pos": 7
+    },
+    {
+      "state": "readB",
+      "symbole": "1",
+      "mem": "+11*101 ",
+      "tr": {
+        "write": " ",
+        "L": "addA"
+      },
+      "pos": 6
+    },
+    {
+      "state": "addA",
+      "symbole": "0",
+      "mem": "+11*10  ",
+      "tr": "L",
+      "pos": 5
+    },
+    {
+      "state": "addA",
+      "symbole": "1",
+      "mem": "+11*10  ",
+      "tr": "L",
+      "pos": 4
+    },
+    {
+      "state": "addA",
+      "symbole": "*",
+      "mem": "+11*10  ",
+      "tr": {
+        "L": "read"
+      },
+      "pos": 3
+    },
+    {
+      "state": "read",
+      "symbole": "1",
+      "mem": "+11*10  ",
+      "tr": {
+        "write": "c",
+        "L": "have1"
+      },
+      "pos": 2
+    },
+    {
+      "state": "have1",
+      "symbole": "1",
+      "mem": "+1c*10  ",
+      "tr": "L",
+      "pos": 1
+    },
+    {
+      "state": "have1",
+      "symbole": "+",
+      "mem": "+1c*10  ",
+      "tr": {
+        "L": "add1"
+      },
+      "pos": 0
+    },
+    {
+      "state": "add1",
+      "symbole": " ",
+      "mem": " +1c*10  ",
+      "tr": {
+        "write": "I",
+        "R": "back1"
+      },
+      "pos": 0
+    },
+    {
+      "state": "back1",
+      "symbole": "+",
+      "mem": "I+1c*10  ",
+      "tr": "R",
+      "pos": 1
+    },
+    {
+      "state": "back1",
+      "symbole": "1",
+      "mem": "I+1c*10  ",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "back1",
+      "symbole": "c",
+      "mem": "I+1c*10  ",
+      "tr": {
+        "write": "1",
+        "L": "read"
+      },
+      "pos": 3
+    },
+    {
+      "state": "read",
+      "symbole": "1",
+      "mem": "I+11*10  ",
+      "tr": {
+        "write": "c",
+        "L": "have1"
+      },
+      "pos": 2
+    },
+    {
+      "state": "have1",
+      "symbole": "+",
+      "mem": "I+c1*10  ",
+      "tr": {
+        "L": "add1"
+      },
+      "pos": 1
+    },
+    {
+      "state": "add1",
+      "symbole": "I",
+      "mem": "I+c1*10  ",
+      "tr": "L",
+      "pos": 0
+    },
+    {
+      "state": "add1",
+      "symbole": " ",
+      "mem": " I+c1*10  ",
+      "tr": {
+        "write": "I",
+        "R": "back1"
+      },
+      "pos": 0
+    },
+    {
+      "state": "back1",
+      "symbole": "I",
+      "mem": "II+c1*10  ",
+      "tr": "R",
+      "pos": 1
+    },
+    {
+      "state": "back1",
+      "symbole": "+",
+      "mem": "II+c1*10  ",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "back1",
+      "symbole": "c",
+      "mem": "II+c1*10  ",
+      "tr": {
+        "write": "1",
+        "L": "read"
+      },
+      "pos": 3
+    },
+    {
+      "state": "read",
+      "symbole": "+",
+      "mem": "II+11*10  ",
+      "tr": {
+        "L": "rewrite"
+      },
+      "pos": 2
+    },
+    {
+      "state": "rewrite",
+      "symbole": "I",
+      "mem": "II+11*10  ",
+      "tr": {
+        "write": "1",
+        "L": "rewrite"
+      },
+      "pos": 1
+    },
+    {
+      "state": "rewrite",
+      "symbole": "I",
+      "mem": "I1+11*10  ",
+      "tr": {
+        "write": "1",
+        "L": "rewrite"
+      },
+      "pos": 0
+    },
+    {
+      "state": "rewrite",
+      "symbole": " ",
+      "mem": " 11+11*10  ",
+      "tr": {
+        "R": "double"
+      },
+      "pos": 0
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 11+11*10  ",
+      "tr": "R",
+      "pos": 1
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 11+11*10  ",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "double",
+      "symbole": "+",
+      "mem": " 11+11*10  ",
+      "tr": "R",
+      "pos": 3
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 11+11*10  ",
+      "tr": "R",
+      "pos": 4
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 11+11*10  ",
+      "tr": "R",
+      "pos": 5
+    },
+    {
+      "state": "double",
+      "symbole": "*",
+      "mem": " 11+11*10  ",
+      "tr": {
+        "write": "0",
+        "R": "shift"
+      },
+      "pos": 6
+    },
+    {
+      "state": "shift",
+      "symbole": "1",
+      "mem": " 11+11010  ",
+      "tr": {
+        "write": "*",
+        "R": "shift1"
+      },
+      "pos": 7
+    },
+    {
+      "state": "shift1",
+      "symbole": "0",
+      "mem": " 11+110*0  ",
+      "tr": {
+        "write": "1",
+        "R": "shift0"
+      },
+      "pos": 8
+    },
+    {
+      "state": "shift0",
+      "symbole": " ",
+      "mem": " 11+110*1  ",
+      "tr": {
+        "write": "0",
+        "R": "right"
+      },
+      "pos": 9
+    },
+    {
+      "state": "right",
+      "symbole": " ",
+      "mem": " 11+110*10 ",
+      "tr": {
+        "L": "readB"
+      },
+      "pos": 10
+    },
+    {
+      "state": "readB",
+      "symbole": "0",
+      "mem": " 11+110*10 ",
+      "tr": {
+        "write": " ",
+        "L": "doubleL"
+      },
+      "pos": 9
+    },
+    {
+      "state": "doubleL",
+      "symbole": "1",
+      "mem": " 11+110*1  ",
+      "tr": "L",
+      "pos": 8
+    },
+    {
+      "state": "doubleL",
+      "symbole": "*",
+      "mem": " 11+110*1  ",
+      "tr": {
+        "write": "0",
+        "R": "shift"
+      },
+      "pos": 7
+    },
+    {
+      "state": "shift",
+      "symbole": "1",
+      "mem": " 11+11001  ",
+      "tr": {
+        "write": "*",
+        "R": "shift1"
+      },
+      "pos": 8
+    },
+    {
+      "state": "shift1",
+      "symbole": " ",
+      "mem": " 11+1100*  ",
+      "tr": {
+        "write": "1",
+        "R": "right"
+      },
+      "pos": 9
+    },
+    {
+      "state": "right",
+      "symbole": " ",
+      "mem": " 11+1100*1 ",
+      "tr": {
+        "L": "readB"
+      },
+      "pos": 10
+    },
+    {
+      "state": "readB",
+      "symbole": "1",
+      "mem": " 11+1100*1 ",
+      "tr": {
+        "write": " ",
+        "L": "addA"
+      },
+      "pos": 9
+    },
+    {
+      "state": "addA",
+      "symbole": "*",
+      "mem": " 11+1100*  ",
+      "tr": {
+        "L": "read"
+      },
+      "pos": 8
+    },
+    {
+      "state": "read",
+      "symbole": "0",
+      "mem": " 11+1100*  ",
+      "tr": {
+        "write": "c",
+        "L": "have0"
+      },
+      "pos": 7
+    },
+    {
+      "state": "have0",
+      "symbole": "0",
+      "mem": " 11+110c*  ",
+      "tr": "L",
+      "pos": 6
+    },
+    {
+      "state": "have0",
+      "symbole": "1",
+      "mem": " 11+110c*  ",
+      "tr": "L",
+      "pos": 5
+    },
+    {
+      "state": "have0",
+      "symbole": "1",
+      "mem": " 11+110c*  ",
+      "tr": "L",
+      "pos": 4
+    },
+    {
+      "state": "have0",
+      "symbole": "+",
+      "mem": " 11+110c*  ",
+      "tr": {
+        "L": "add0"
+      },
+      "pos": 3
+    },
+    {
+      "state": "add0",
+      "symbole": "1",
+      "mem": " 11+110c*  ",
+      "tr": {
+        "write": "I",
+        "R": "back0"
+      },
+      "pos": 2
+    },
+    {
+      "state": "back0",
+      "symbole": "+",
+      "mem": " 1I+110c*  ",
+      "tr": "R",
+      "pos": 3
+    },
+    {
+      "state": "back0",
+      "symbole": "1",
+      "mem": " 1I+110c*  ",
+      "tr": "R",
+      "pos": 4
+    },
+    {
+      "state": "back0",
+      "symbole": "1",
+      "mem": " 1I+110c*  ",
+      "tr": "R",
+      "pos": 5
+    },
+    {
+      "state": "back0",
+      "symbole": "0",
+      "mem": " 1I+110c*  ",
+      "tr": "R",
+      "pos": 6
+    },
+    {
+      "state": "back0",
+      "symbole": "c",
+      "mem": " 1I+110c*  ",
+      "tr": {
+        "write": "0",
+        "L": "read"
+      },
+      "pos": 7
+    },
+    {
+      "state": "read",
+      "symbole": "0",
+      "mem": " 1I+1100*  ",
+      "tr": {
+        "write": "c",
+        "L": "have0"
+      },
+      "pos": 6
+    },
+    {
+      "state": "have0",
+      "symbole": "1",
+      "mem": " 1I+11c0*  ",
+      "tr": "L",
+      "pos": 5
+    },
+    {
+      "state": "have0",
+      "symbole": "1",
+      "mem": " 1I+11c0*  ",
+      "tr": "L",
+      "pos": 4
+    },
+    {
+      "state": "have0",
+      "symbole": "+",
+      "mem": " 1I+11c0*  ",
+      "tr": {
+        "L": "add0"
+      },
+      "pos": 3
+    },
+    {
+      "state": "add0",
+      "symbole": "I",
+      "mem": " 1I+11c0*  ",
+      "tr": "L",
+      "pos": 2
+    },
+    {
+      "state": "add0",
+      "symbole": "1",
+      "mem": " 1I+11c0*  ",
+      "tr": {
+        "write": "I",
+        "R": "back0"
+      },
+      "pos": 1
+    },
+    {
+      "state": "back0",
+      "symbole": "I",
+      "mem": " II+11c0*  ",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "back0",
+      "symbole": "+",
+      "mem": " II+11c0*  ",
+      "tr": "R",
+      "pos": 3
+    },
+    {
+      "state": "back0",
+      "symbole": "1",
+      "mem": " II+11c0*  ",
+      "tr": "R",
+      "pos": 4
+    },
+    {
+      "state": "back0",
+      "symbole": "1",
+      "mem": " II+11c0*  ",
+      "tr": "R",
+      "pos": 5
+    },
+    {
+      "state": "back0",
+      "symbole": "c",
+      "mem": " II+11c0*  ",
+      "tr": {
+        "write": "0",
+        "L": "read"
+      },
+      "pos": 6
+    },
+    {
+      "state": "read",
+      "symbole": "1",
+      "mem": " II+1100*  ",
+      "tr": {
+        "write": "c",
+        "L": "have1"
+      },
+      "pos": 5
+    },
+    {
+      "state": "have1",
+      "symbole": "1",
+      "mem": " II+1c00*  ",
+      "tr": "L",
+      "pos": 4
+    },
+    {
+      "state": "have1",
+      "symbole": "+",
+      "mem": " II+1c00*  ",
+      "tr": {
+        "L": "add1"
+      },
+      "pos": 3
+    },
+    {
+      "state": "add1",
+      "symbole": "I",
+      "mem": " II+1c00*  ",
+      "tr": "L",
+      "pos": 2
+    },
+    {
+      "state": "add1",
+      "symbole": "I",
+      "mem": " II+1c00*  ",
+      "tr": "L",
+      "pos": 1
+    },
+    {
+      "state": "add1",
+      "symbole": " ",
+      "mem": " II+1c00*  ",
+      "tr": {
+        "write": "I",
+        "R": "back1"
+      },
+      "pos": 0
+    },
+    {
+      "state": "back1",
+      "symbole": "I",
+      "mem": "III+1c00*  ",
+      "tr": "R",
+      "pos": 1
+    },
+    {
+      "state": "back1",
+      "symbole": "I",
+      "mem": "III+1c00*  ",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "back1",
+      "symbole": "+",
+      "mem": "III+1c00*  ",
+      "tr": "R",
+      "pos": 3
+    },
+    {
+      "state": "back1",
+      "symbole": "1",
+      "mem": "III+1c00*  ",
+      "tr": "R",
+      "pos": 4
+    },
+    {
+      "state": "back1",
+      "symbole": "c",
+      "mem": "III+1c00*  ",
+      "tr": {
+        "write": "1",
+        "L": "read"
+      },
+      "pos": 5
+    },
+    {
+      "state": "read",
+      "symbole": "1",
+      "mem": "III+1100*  ",
+      "tr": {
+        "write": "c",
+        "L": "have1"
+      },
+      "pos": 4
+    },
+    {
+      "state": "have1",
+      "symbole": "+",
+      "mem": "III+c100*  ",
+      "tr": {
+        "L": "add1"
+      },
+      "pos": 3
+    },
+    {
+      "state": "add1",
+      "symbole": "I",
+      "mem": "III+c100*  ",
+      "tr": "L",
+      "pos": 2
+    },
+    {
+      "state": "add1",
+      "symbole": "I",
+      "mem": "III+c100*  ",
+      "tr": "L",
+      "pos": 1
+    },
+    {
+      "state": "add1",
+      "symbole": "I",
+      "mem": "III+c100*  ",
+      "tr": "L",
+      "pos": 0
+    },
+    {
+      "state": "add1",
+      "symbole": " ",
+      "mem": " III+c100*  ",
+      "tr": {
+        "write": "I",
+        "R": "back1"
+      },
+      "pos": 0
+    },
+    {
+      "state": "back1",
+      "symbole": "I",
+      "mem": "IIII+c100*  ",
+      "tr": "R",
+      "pos": 1
+    },
+    {
+      "state": "back1",
+      "symbole": "I",
+      "mem": "IIII+c100*  ",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "back1",
+      "symbole": "I",
+      "mem": "IIII+c100*  ",
+      "tr": "R",
+      "pos": 3
+    },
+    {
+      "state": "back1",
+      "symbole": "+",
+      "mem": "IIII+c100*  ",
+      "tr": "R",
+      "pos": 4
+    },
+    {
+      "state": "back1",
+      "symbole": "c",
+      "mem": "IIII+c100*  ",
+      "tr": {
+        "write": "1",
+        "L": "read"
+      },
+      "pos": 5
+    },
+    {
+      "state": "read",
+      "symbole": "+",
+      "mem": "IIII+1100*  ",
+      "tr": {
+        "L": "rewrite"
+      },
+      "pos": 4
+    },
+    {
+      "state": "rewrite",
+      "symbole": "I",
+      "mem": "IIII+1100*  ",
+      "tr": {
+        "write": "1",
+        "L": "rewrite"
+      },
+      "pos": 3
+    },
+    {
+      "state": "rewrite",
+      "symbole": "I",
+      "mem": "III1+1100*  ",
+      "tr": {
+        "write": "1",
+        "L": "rewrite"
+      },
+      "pos": 2
+    },
+    {
+      "state": "rewrite",
+      "symbole": "I",
+      "mem": "II11+1100*  ",
+      "tr": {
+        "write": "1",
+        "L": "rewrite"
+      },
+      "pos": 1
+    },
+    {
+      "state": "rewrite",
+      "symbole": "I",
+      "mem": "I111+1100*  ",
+      "tr": {
+        "write": "1",
+        "L": "rewrite"
+      },
+      "pos": 0
+    },
+    {
+      "state": "rewrite",
+      "symbole": " ",
+      "mem": " 1111+1100*  ",
+      "tr": {
+        "R": "double"
+      },
+      "pos": 0
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 1
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 2
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 3
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 4
+    },
+    {
+      "state": "double",
+      "symbole": "+",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 5
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 6
+    },
+    {
+      "state": "double",
+      "symbole": "1",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 7
+    },
+    {
+      "state": "double",
+      "symbole": "0",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 8
+    },
+    {
+      "state": "double",
+      "symbole": "0",
+      "mem": " 1111+1100*  ",
+      "tr": "R",
+      "pos": 9
+    },
+    {
+      "state": "double",
+      "symbole": "*",
+      "mem": " 1111+1100*  ",
+      "tr": {
+        "write": "0",
+        "R": "shift"
+      },
+      "pos": 10
+    },
+    {
+      "state": "shift",
+      "symbole": " ",
+      "mem": " 1111+11000  ",
+      "tr": {
+        "L": "tidy"
+      },
+      "pos": 11
+    },
+    {
+      "state": "tidy",
+      "symbole": "0",
+      "mem": " 1111+11000  ",
+      "tr": {
+        "write": " ",
+        "L": "tidy"
+      },
+      "pos": 10
+    },
+    {
+      "state": "tidy",
+      "symbole": "0",
+      "mem": " 1111+1100   ",
+      "tr": {
+        "write": " ",
+        "L": "tidy"
+      },
+      "pos": 9
+    },
+    {
+      "state": "tidy",
+      "symbole": "0",
+      "mem": " 1111+110    ",
+      "tr": {
+        "write": " ",
+        "L": "tidy"
+      },
+      "pos": 8
+    },
+    {
+      "state": "tidy",
+      "symbole": "1",
+      "mem": " 1111+11     ",
+      "tr": {
+        "write": " ",
+        "L": "tidy"
+      },
+      "pos": 7
+    },
+    {
+      "state": "tidy",
+      "symbole": "1",
+      "mem": " 1111+1      ",
+      "tr": {
+        "write": " ",
+        "L": "tidy"
+      },
+      "pos": 6
+    },
+    {
+      "state": "tidy",
+      "symbole": "+",
+      "mem": " 1111+       ",
+      "tr": {
+        "write": " ",
+        "L": "done"
+      },
+      "pos": 5
+    }
+  ]
+}
